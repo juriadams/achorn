@@ -1,12 +1,12 @@
 {
     "name": "achorn",
-    "version": "1.0.0",
-    "description": "",
+    "version": "0.0.1",
+    "description": "🌰 A colourful, good looking, fully customisable logger for the browser",
     "scripts": {
-        "build": "tsc",
+        "build": "webpack",
         "watch": "webpack --watch"
     },
-    "author": "",
+    "author": "Juri Adams <juri@adams.sh>",
     "license": "ISC",
     "devDependencies": {
         "prettier": "^2.0.5",
