@@ -2,6 +2,9 @@
     "name": "achorn",
     "version": "0.0.1",
     "description": "🌰 A colourful, good looking, fully customisable logger for the browser",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
     "scripts": {
         "build": "webpack",
         "watch": "webpack --watch"
