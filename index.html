@@ -8,19 +8,41 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet" />
     </head>
     <body>
-        <div
-            style="
+        <div class="wrapper">
+            <div class="title">
+                <p style="font-size: 36px;">Open the <b>DevTools</b> to see Achorn in action</p>
+
+                <p style="font-size: 16px; margin-top: 30px;">
+                    Can't find <span class="code">achorn.js</span>? Run <span class="code">npm run build</span> first!
+                </p>
+            </div>
+        </div>
+
+        <style>
+            div.wrapper {
                 height: 100vh;
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                font-family: 'Open Sans';
-                font-size: 36px;
+            }
+
+            div.wrapper > div.title {
+                text-align: center;
+            }
+
+            div.wrapper > div.title > p {
+                margin: 0;
+                font-family: "Open Sans";
                 font-weight: 300;
-            "
-        >
-            <p>Open the <b>DevTools</b> to see Achorn in action</p>
-        </div>
+            }
+
+            span.code {
+                background-color: #eeeeee;
+                padding: 2px 5px;
+                border-radius: 5px;
+                font-family: monospace;
+            }
+        </style>
 
         <!-- Load Achorn -->
         <script src="dist/achorn.js"></script>
