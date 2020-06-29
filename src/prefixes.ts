@@ -38,7 +38,7 @@ export const prefixes: Prefix[] = [
             },
             {
                 string: "warning",
-                style: "color: #DBA02A; text-decoration: underline;",
+                style: "color: #DBA02A; font-weight: bold;",
             },
         ],
     },
@@ -118,6 +118,19 @@ export const prefixes: Prefix[] = [
             {
                 string: "fatal",
                 style: "color: #FF312D; font-weight: bold;",
+            },
+        ],
+    },
+    {
+        keys: ["timerStart"],
+        parts: [
+            {
+                string: "‣ ",
+                style: "color: #2EB6CB;",
+            },
+            {
+                string: "timer",
+                style: "color: #2EB6CB; font-weight: bold;",
             },
         ],
     },
