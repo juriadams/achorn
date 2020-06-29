@@ -5,7 +5,7 @@ import { Part } from "./interfaces/part.interface";
 /**
  * Main Achorn class hosting Achorn core functionality
  */
-export class Achorn {
+export default class Achorn {
     /**
      * Global Achorn config
      */
@@ -132,7 +132,7 @@ export class Achorn {
 /**
  * Achorn Timer class handling everything Timer related
  */
-export class Timer {
+class Timer {
     /**
      * Achorn instance to compose console output
      */
