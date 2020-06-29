@@ -106,32 +106,17 @@ export class Achorn {
         }
 
         // Log message to console
-        if (input.length === 1) {
-            switch (prefix.logType) {
-                case "warn":
-                    console.warn(...this.joinParts(parts), input[0]);
-                    return;
+        switch (prefix.logType) {
+            case "warn":
+                console.warn(...this.joinParts(parts, 1), ...(input.length > 0 ? input : [input[0]]));
+                return;
 
-                case "error":
-                    console.error(...this.joinParts(parts), input[0]);
-                    return;
+            case "error":
+                console.error(...this.joinParts(parts, 1), ...(input.length > 0 ? input : [input[0]]));
+                return;
 
-                default:
-                    console.log(...this.joinParts(parts, 2), input[0]);
-            }
-        } else {
-            switch (prefix.logType) {
-                case "warn":
-                    console.warn(...this.joinParts(parts), ...input);
-                    return;
-
-                case "error":
-                    console.error(...this.joinParts(parts), ...input);
-                    return;
-
-                default:
-                    console.log(...this.joinParts(parts, 2), ...input);
-            }
+            default:
+                console.log(...this.joinParts(parts, 2), ...(input.length > 0 ? input : [input[0]]));
         }
     }
 
