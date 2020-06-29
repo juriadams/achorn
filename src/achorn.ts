@@ -2,7 +2,10 @@ import { Config } from "./interfaces/config.interface";
 import { prefixes } from "./prefixes";
 import { Part } from "./interfaces/part.interface";
 
-export default class {
+/**
+ * Main Achorn class hosting Achorn core functionality
+ */
+export class Achorn {
     /**
      * Global Achorn config
      */
@@ -19,7 +22,7 @@ export default class {
             }).length;
     }
 
-    constructor(config: Config) {
+    constructor(config?: Config) {
         // Use config if one is given
         this.config(config || {});
 
@@ -49,7 +52,7 @@ export default class {
      * Joins Array of paths to loggable message
      * @param parts Array of Parts to log
      */
-    private joinParts(parts: Part[], whitespace?: number): string[] {
+    public joinParts(parts: Part[], whitespace?: number): string[] {
         let message = "" + " ".repeat(whitespace || 0);
         let styles: string[] = [];
 
@@ -62,24 +65,32 @@ export default class {
     }
 
     /**
+     * Helper method to calculate additional whitespace after given parts
+     * @param parts Array of Parts to determine whitespace after
+     */
+    public calcAdditionalWhitespace(parts: Part[]): number {
+        const prefixLength = parts[1].string.length;
+        return this.longestPrefixLength - prefixLength + 1;
+    }
+
+    /**
      * Log given input with given prefix
      * @param prefixName Name/key of the prefix which will be used to log message
      * @param input Array of parts to log after prefix, can literally be anything
      */
     private consoleLog(prefixName: string, input: any[]): void {
-        // Get desired prefix and calculate its length
-        const prefix = prefixes.find((prefix) => prefix.keys.includes(prefixName));
-        const prefixLength = prefix.parts[1].string.length;
+        // Get desired prefix
+        const prefix =
+            prefixes.find((prefix) => prefix.keys.includes(prefixName)) ||
+            prefixes.find((prefix) => prefix.keys.includes("info"));
 
         let parts: Part[] = [].concat(prefix.parts);
 
         // Generate whitespace after prefix
-        if (prefixLength < this.longestPrefixLength + 1) {
-            parts.push({
-                string: " ".repeat(this.longestPrefixLength - prefixLength + 1),
-                style: "color: unset;",
-            });
-        }
+        parts.push({
+            string: " ".repeat(this.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
 
         // Add timestamp if option is set
         if (this.globalConfig.showTimestamp) {
@@ -122,5 +133,208 @@ export default class {
                     console.log(...this.joinParts(parts, 2), ...input);
             }
         }
+    }
+
+    /**
+     * Creates and returns a new Timer
+     * @param key Timer key, optional
+     */
+    public timer(key?: string): Timer {
+        return new Timer(key);
+    }
+}
+
+/**
+ * Achorn Timer class handling everything Timer related
+ */
+export class Timer {
+    /**
+     * Achorn instance to compose console output
+     */
+    public achorn: Achorn = new Achorn();
+
+    /**
+     * Start time unix timestamp
+     */
+    public startTime: number;
+
+    /**
+     * End time unix timestamp
+     */
+    public endTime: number;
+
+    /**
+     * Timer duration in milliseconds
+     */
+    public duration: number;
+
+    /**
+     * Timer key to be displayed in console output
+     */
+    public key: string;
+
+    constructor(key?: string) {
+        // Save timer key
+        this.key = key;
+
+        // Start timer
+        this.start();
+    }
+
+    /**
+     * Start Timer
+     */
+    public start(): void {
+        // Save start timestamp
+        this.startTime = +new Date();
+
+        // Generate parts for console output
+        const parts = [
+            {
+                string: "‣ ",
+                style: "color: #2EB6CB;",
+            },
+            {
+                string: this.key ? this.key : "timer",
+                style: "color: #2EB6CB; font-weight: bold;",
+            },
+        ];
+
+        // Add additional whitespace after output
+        parts.push({
+            string: " ".repeat(this.achorn.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
+
+        // Log start output
+        console.log(...this.achorn.joinParts(parts, 2), `Timer started`);
+    }
+
+    /**
+     * End Timer
+     */
+    public end(): void {
+        // Save end Timestamp and calculate duration
+        this.endTime = +new Date();
+        this.duration = this.endTime - this.startTime;
+
+        // Generate parts for console output
+        const parts = [
+            {
+                string: "‣ ",
+                style: "color: #2EB6CB;",
+            },
+            {
+                string: this.key ? this.key : "timer",
+                style: "color: #2EB6CB; font-weight: bold;",
+            },
+        ];
+
+        // Add additional whitespace after output
+        parts.push({
+            string: " ".repeat(this.achorn.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
+
+        // Log start message
+        console.log(...this.achorn.joinParts(parts, 2), `Timer ended after ${this.duration}ms`);
+    }
+
+    /**
+     * End Timer with success message
+     */
+    public success(...input: any[]): void {
+        this.endTime = +new Date();
+        this.duration = this.endTime - this.startTime;
+
+        // Generate parts for console output
+        const parts = [
+            {
+                string: "✔️ ",
+                style: "color: #7EB507;",
+            },
+            {
+                string: this.key ? this.key : "success",
+                style: "color: #7EB507; font-weight: bold;",
+            },
+        ];
+
+        // Add additional whitespace after output
+        parts.push({
+            string: " ".repeat(this.achorn.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
+
+        // Log success message
+        console.log(
+            ...this.achorn.joinParts(parts, 2),
+            ...(input && input.length > 0 ? input : [`Timer succeeded after ${this.duration}ms`]),
+        );
+    }
+
+    /**
+     * End Timer with error message
+     */
+    public error(...input: any[]): void {
+        // Save end Timestamp and calculate duration
+        this.endTime = +new Date();
+        this.duration = this.endTime - this.startTime;
+
+        // Generate parts for console output
+        const parts = [
+            {
+                string: "× ",
+                style: "color: #FF312D;",
+            },
+            {
+                string: this.key ? this.key : "aborted",
+                style: "color: #FF312D; font-weight: bold;",
+            },
+        ];
+
+        // Add additional whitespace after output
+        parts.push({
+            string: " ".repeat(this.achorn.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
+
+        // Log error message
+        console.error(
+            ...this.achorn.joinParts(parts, 1),
+            ...(input && input.length > 0 ? input : [`Timer errored after ${this.duration}ms`]),
+        );
+    }
+
+    /**
+     * End Timer with abort message
+     */
+    public abort(...input: any[]): void {
+        // Save end Timestamp and calculate duration
+        this.endTime = +new Date();
+        this.duration = this.endTime - this.startTime;
+
+        // Generate parts for console output
+        const parts = [
+            {
+                string: "⚠️ ",
+                style: "color: #DBA02A;",
+            },
+            {
+                string: this.key ? this.key : "error",
+                style: "color: #DBA02A; font-weight: bold;",
+            },
+        ];
+
+        // Add additional whitespace after output
+        parts.push({
+            string: " ".repeat(this.achorn.calcAdditionalWhitespace(parts)),
+            style: "color: unset;",
+        });
+
+        // Log abort message
+        console.warn(
+            ...this.achorn.joinParts(parts, 1),
+            ...(input && input.length > 0 ? input : [`Timer aborted after ${this.duration}ms`]),
+        );
     }
 }
