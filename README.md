@@ -23,11 +23,37 @@
 -   Easy to use **Timers**, e.g. for HTTP requests
 -   ... you can even add your own loggers/prefixes!
 
+## But does it work in...?
+
+| ![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![IE](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![Opera](https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png) |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Latest ✔                                                                                            | Latest ✔                                                                                               | 10+ ✔                                                                                       | Latest ✔                                                                                         | 6.1+ ✔                                                                                              |
+
 ## How to Install
 
-_Installation Guide following soon..._
+### NPM
 
-## How to use
+```
+npm install achorn
+```
+
+### Yarn
+
+```
+yarn add achorn
+```
+
+### CDN
+
+```html
+<!-- unpkg -->
+<script src="https://unpkg.com/achorn/lib/achorn.js"></script>
+
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/achorn/lib/achorn.js"></script>
+```
+
+## How to Use
 
 The first thing after importing Achorn is creating a `new Achorn()` instance:
 
