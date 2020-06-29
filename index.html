@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Achorn Example</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+        <div
+            style="
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                font-family: 'Open Sans';
+                font-size: 36px;
+                font-weight: 300;
+            "
+        >
+            <p>Open the <b>DevTools</b> to see Achorn in action</p>
+        </div>
+
+        <!-- Load Achorn -->
+        <script src="dist/achorn.js"></script>
+
+        <script>
+            // Create new Achorn instance
+            const achorn = new Achorn();
+
+            // Simple log types
+            achorn.success("I work!");
+            achorn.error("Oh no!");
+            achorn.warn("Uh-oh...");
+            achorn.await("Waiting...");
+            achorn.start("Let's go!");
+            achorn.pause("Time out!");
+            achorn.debug("Hmm...");
+            achorn.info("Check this out:", { true: false });
+            achorn.fatal(new Error("x_x"));
+
+            // Create some Timers
+            const timer = achorn.timer("Timer 1");
+            const timer2 = achorn.timer("Timer 2");
+            const timer3 = achorn.timer("Timer 3");
+            const timer4 = achorn.timer("Timer 4");
+
+            // Finish timers
+            setTimeout(() => {
+                timer.end();
+                timer2.success();
+                timer3.error();
+                timer4.abort();
+            }, 500);
+        </script>
+    </body>
+</html>
