@@ -1,11 +1,14 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
+        "outDir": "./lib/",
         "noImplicitAny": true,
         "removeComments": true,
         "sourceMap": true,
         "module": "commonjs",
         "target": "es6",
-        "lib": ["es6", "dom", "es2017"]
-    }
+        "lib": ["es6", "dom", "es2017"],
+        "declaration": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules/"]
 }
