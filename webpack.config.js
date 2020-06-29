@@ -18,7 +18,7 @@ module.exports = {
     },
     output: {
         filename: "achorn.js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "lib"),
         libraryTarget: "var",
         library: "Achorn",
     },
