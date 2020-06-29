@@ -1,6 +1,6 @@
 {
     "name": "@4dams/achorn",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "🌰 A colourful, good looking, fully customisable logger for the browser",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
