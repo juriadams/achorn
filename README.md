@@ -1,4 +1,4 @@
-![](https://i.imgur.com/Z59ujWc.png)
+![](repository/banner.png)
 
 <p align="center">
     <a><img src="https://github.com/4dams/achorn/workflows/build/badge.svg"></a>
@@ -12,7 +12,7 @@
 
 ## Preview
 
-![](https://i.imgur.com/DNGU8T5.png)
+![](repository/example.png)
 
 ## This project is still under development!
 
