@@ -253,7 +253,9 @@ class Timer {
         // Log success message
         console.log(
             ...this.achorn.joinParts(parts, 2),
-            ...(input && input.length > 0 ? input : [`Timer succeeded after ${this.duration}ms`]),
+            ...(input && input.length > 0
+                ? input.concat([`(${this.duration}ms)`])
+                : [`Timer succeeded after ${this.duration}ms`]),
         );
     }
 
@@ -286,7 +288,9 @@ class Timer {
         // Log error message
         console.error(
             ...this.achorn.joinParts(parts, 1),
-            ...(input && input.length > 0 ? input : [`Timer errored after ${this.duration}ms`]),
+            ...(input && input.length > 0
+                ? input.concat([`(${this.duration}ms)`])
+                : [`Timer errored after ${this.duration}ms`]),
         );
     }
 
@@ -319,7 +323,9 @@ class Timer {
         // Log abort message
         console.warn(
             ...this.achorn.joinParts(parts, 1),
-            ...(input && input.length > 0 ? input : [`Timer aborted after ${this.duration}ms`]),
+            ...(input && input.length > 0
+                ? input.concat([`(${this.duration}ms)`])
+                : [`Timer aborted after ${this.duration}ms`]),
         );
     }
 }
