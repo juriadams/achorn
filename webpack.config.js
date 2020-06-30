@@ -1,7 +1,6 @@
 const path = require("path");
-const webpack = require("webpack");
 
-module.exports = {
+const webpackConfig = {
     mode: "production",
     entry: {
         achorn: "./src/achorn.ts",
@@ -24,6 +23,9 @@ module.exports = {
         path: path.resolve(__dirname, "lib"),
         library: "Achorn",
         libraryTarget: "umd",
+        libraryExport: "default",
         umdNamedDefine: true,
     },
 };
+
+module.exports = [webpackConfig];
