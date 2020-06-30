@@ -31,16 +31,20 @@
 
 ## How to Install
 
-### NPM
+### Package Manager
 
 ```
+# NPM
 npm install achorn
-```
 
-### Yarn
-
-```
+# Yarn
 yarn add achorn
+```
+
+Don't forget to import Achorn!
+
+```ts
+import Achorn from "achorn";
 ```
 
 ### CDN
@@ -72,30 +76,27 @@ Achorn takes an optional Config object as input. For all config options, see the
 
 After the initial setup, you can already use any of Achorns default loggers, which are defined in their dedicated prefixes file. Optionally, you can add your own prefixes/loggers by providing them in the `prefixes` field in the Config.
 
-## Timers
+## Documentation
+
+### Timers
 
 The most common use for Timers in Achorn are probably HTTP requests. Here's an example implementation:
 
 ```js
-// Create new Timer called "Async"
+// Create timer with custom name (optional)
 const timer = achorn.timer("Async");
 
-// Make request
 request("https://google.com")
     .then((res) => {
-        // End timer with success message
-        timer.success("Request successful! 🎉", res);
+        timer.success("Request successful! 🎉");
+        achorn.info("Result:", res);
     })
     .catch((err) => {
-        // End timer with error message
-        timer.error("Request failed.", err);
+        timer.error("Request failed.");
+        achorn.error(err);
     });
 ```
 
+Which will then produce this console output:
+
 ![](repository/timer.png)
-
-## Local Development
-
-After cloning the repository, all you have to do is run `npm run watch` to start Webpack in watch mode, which will listen for file changes and rebuild Achorn accordingly.
-
-Then, simply open the `index.html` of this project in the browser!

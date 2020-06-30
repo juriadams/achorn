@@ -13,7 +13,8 @@
                 <p style="font-size: 36px;">Open the <b>DevTools</b> to see Achorn in action</p>
 
                 <p style="font-size: 16px; margin-top: 30px;">
-                    Can't find <span class="code">achorn.js</span>? Run <span class="code">npm run build</span> first!
+                    Can't find <span class="code">lib/achorn.js</span>? Run
+                    <span class="code">npm run build</span> first!
                 </p>
             </div>
         </div>
@@ -62,19 +63,14 @@
             achorn.info("Check this out:", { true: false });
             achorn.fatal(new Error("x_x"));
 
-            // Create some Timers
-            const timer = achorn.timer("Timer 1");
-            const timer2 = achorn.timer("Timer 2");
-            const timer3 = achorn.timer("Timer 3");
-            const timer4 = achorn.timer("Timer 4");
+            // Timer examples
+            // const timer = achorn.timer("Async");
+            // timer.success("Request successful! 🎉");
+            // achorn.info("Result:", { some: "data" });
 
-            // Finish timers
-            setTimeout(() => {
-                timer.end();
-                timer2.success();
-                timer3.error();
-                timer4.abort();
-            }, 500);
+            // const errorTimer = achorn.timer("Bad");
+            // errorTimer.error("Request failed.");
+            // achorn.error(new Error("<some more info on why the request failed>"));
         </script>
     </body>
 </html>
