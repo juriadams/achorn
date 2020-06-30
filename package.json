@@ -1,6 +1,6 @@
 {
     "name": "achorn",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "🌰 A colourful, good looking, fully customisable logger for the browser",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
