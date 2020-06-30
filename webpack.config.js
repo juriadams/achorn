@@ -1,9 +1,12 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
     mode: "production",
-    entry: "./index.js",
-    // devtool: "inline-source-map",
+    entry: {
+        achorn: "./src/achorn.ts",
+    },
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -17,9 +20,10 @@ module.exports = {
         extensions: [".ts", ".js"],
     },
     output: {
-        filename: "achorn.js",
+        filename: "[name].js",
         path: path.resolve(__dirname, "lib"),
+        library: "Achorn",
         libraryTarget: "umd",
-        library: "achorn",
+        umdNamedDefine: true,
     },
 };

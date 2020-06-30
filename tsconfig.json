@@ -1,12 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",
         "module": "commonjs",
-        "declaration": true,
         "outDir": "./lib",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "lib": ["es6", "dom", "es2017"]
+        "lib": ["es6", "dom", "es2017"],
+        "sourceMap": true,
+        "declaration": true
     },
     "include": ["src"],
     "exclude": ["node_modules"]
