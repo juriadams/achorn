@@ -64,6 +64,15 @@
             achorn.fatal(new Error("x_x"));
 
             // Timer examples
+            const timer = achorn.timer({
+                key: "Timer",
+                silent: true,
+            });
+
+            setTimeout(() => {
+                timer.success("Done!");
+            }, 500);
+
             // const timer = achorn.timer("Async");
             // timer.success("Request successful! 🎉");
             // achorn.info("Result:", { some: "data" });

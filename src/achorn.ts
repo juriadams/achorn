@@ -1,6 +1,7 @@
 import { Config } from "./interfaces/config.interface";
 import { prefixes } from "./prefixes";
 import { Part } from "./interfaces/part.interface";
+import { TimerOptions } from "./interfaces/timer-options.interface";
 
 /**
  * Main Achorn class hosting Achorn core functionality
@@ -123,10 +124,18 @@ export default class Achorn {
 
     /**
      * Creates and returns a new Timer
-     * @param key Timer key, optional
+     * @param options Either Timer key as string or TimerOptions object
      */
-    public timer(key?: string): Timer {
-        return new Timer(key);
+    public timer(options?: string | TimerOptions): Timer {
+        return new Timer(typeof options === "string" ? { key: options } : options);
+    }
+
+    /**
+     * Creates and returns a new silent Timer
+     * @param options Either Timer key as string or TimerOptions object
+     */
+    public silentTimer(options?: string | TimerOptions): Timer {
+        return new Timer(typeof options === "string" ? { key: options, silent: true } : options);
     }
 }
 
@@ -155,13 +164,13 @@ class Timer {
     public duration: number;
 
     /**
-     * Timer key to be displayed in console output
+     * TimerOptions object
      */
-    public key: string;
+    public options: TimerOptions;
 
-    constructor(key?: string) {
+    constructor(options?: TimerOptions) {
         // Save timer key
-        this.key = key;
+        this.options = options;
 
         // Start timer
         this.start();
@@ -181,7 +190,7 @@ class Timer {
                 style: "color: #2EB6CB;",
             },
             {
-                string: this.key ? this.key : "timer",
+                string: this.options.key ? this.options.key : "timer",
                 style: "color: #2EB6CB; font-weight: bold;",
             },
         ];
@@ -193,7 +202,9 @@ class Timer {
         });
 
         // Log start output
-        console.log(...this.achorn.joinParts(parts, 2), `Timer started`);
+        if (!this.options.silent) {
+            console.log(...this.achorn.joinParts(parts, 2), `Timer started`);
+        }
     }
 
     /**
@@ -211,7 +222,7 @@ class Timer {
                 style: "color: #2EB6CB;",
             },
             {
-                string: this.key ? this.key : "timer",
+                string: this.options.key ? this.options.key : "timer",
                 style: "color: #2EB6CB; font-weight: bold;",
             },
         ];
@@ -222,7 +233,7 @@ class Timer {
             style: "color: unset;",
         });
 
-        // Log start message
+        // Log end message
         console.log(...this.achorn.joinParts(parts, 2), `Timer ended after ${this.duration}ms`);
     }
 
@@ -240,7 +251,7 @@ class Timer {
                 style: "color: #7EB507;",
             },
             {
-                string: this.key ? this.key : "success",
+                string: this.options.key ? this.options.key : "success",
                 style: "color: #7EB507; font-weight: bold;",
             },
         ];
@@ -275,7 +286,7 @@ class Timer {
                 style: "color: #FF312D;",
             },
             {
-                string: this.key ? this.key : "aborted",
+                string: this.options.key ? this.options.key : "aborted",
                 style: "color: #FF312D; font-weight: bold;",
             },
         ];
@@ -310,7 +321,7 @@ class Timer {
                 style: "color: #DBA02A;",
             },
             {
-                string: this.key ? this.key : "error",
+                string: this.options.key ? this.options.key : "error",
                 style: "color: #DBA02A; font-weight: bold;",
             },
         ];
