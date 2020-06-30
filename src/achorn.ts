@@ -70,7 +70,8 @@ export default class Achorn {
      */
     public calcAdditionalWhitespace(parts: Part[]): number {
         const prefixLength = parts[1].string.length;
-        return this.longestPrefixLength - prefixLength + 1;
+        const additionalWhitespace = this.longestPrefixLength - prefixLength + 1;
+        return additionalWhitespace < 0 ? 0 : additionalWhitespace;
     }
 
     /**
