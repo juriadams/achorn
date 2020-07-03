@@ -3,11 +3,12 @@
 <p align="center">
     <a><img src="https://github.com/4dams/achorn/workflows/build/badge.svg"></a>
     <br>
-    <a><img src="https://img.shields.io/npm/v/achorn"></a>
-    <a><img src="https://img.shields.io/badge/node-v8%2B-brightgreen"></a>
-    <a><img src="https://img.shields.io/npm/dt/achorn"></a>
-    <a><img src="https://img.shields.io/github/issues/4dams/achorn"></a>
-    <a><img src="https://img.shields.io/github/issues-pr/4dams/achorn"></a>
+    <a><img src="https://badgen.net/npm/v/achorn"></a>
+    <a><img src="https://badgen.net/bundlephobia/minzip/achorn"></a>
+    <a><img src="https://badgen.net/badge/dependencies/0/green"></a>
+    <a><img src="https://badgen.net/npm/dt/achorn"></a>
+    <a><img src="https://badgen.net/github/issues/4dams/achorn"></a>
+    <a><img src="https://badgen.net/github/last-commit/4dams/achorn"</a>
 </p>
 
 [`Achorn`](https://github.com/4dams/achorn) is a colorful, good-looking, fully customizable logging utility for the Browser. It is heavily inspired by [@klaussinani](https://github.com/klaussinani/signal)s [Signale](https://github.com/klaussinani/signale) logger for Node.js backend applications.
