@@ -33,8 +33,7 @@ export default class Achorn {
         // Iterate over all defined prefixes and create methods of them
         allPrefixes.map((prefix) => {
             prefix.keys.map((key) => {
-                // @ts-ignore
-                this[key] = (...input: any[]) => {
+                Achorn.prototype[key] = (...input: any[]) => {
                     this.consoleLog(key, input);
                 };
             });
